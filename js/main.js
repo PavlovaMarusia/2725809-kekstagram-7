@@ -38,12 +38,15 @@ const createArrOfGeneratedObjects = function(){
   const resultArr = [];
   for(let i=1; i<=25; i++){
     const obj = {};
-    obj.id = createRandomId(1, 25);
-    obj.url = `photos/${createRandomId(1, 25)}.jpg`;
+    const generatedId = createRandomId(1, 25);
+    obj.id = generatedId();
+    const generatedNumberPhoto = createRandomId(1, 25);
+    obj.url = `photos/${generatedNumberPhoto()}.jpg`;
     obj.description = 'Описание фотографии';
-    obj.likes = createRandomId(15, 200);
+    const generatedCointLikes = createRandomId(15, 200)
+    obj.likes = generatedCointLikes();
     const comments = [];
-    const countComments = createRandomId(0, 30);
+    const countComments = getRandomInt(0, 30);
     for(let j=0; j<countComments; j++){
       const comment = {};
       comment.id = j;
@@ -51,15 +54,15 @@ const createArrOfGeneratedObjects = function(){
       const countMessages = getRandomInt(1, 2);
       comment.message = '';
       for(let k=0; k<countMessages; k++){
-        const numberMessage = createRandomId(0, 5);
-        comment.message += `${MESSAGE[numberMessage]} `;
+        const generatedNumberMessage = createRandomId(0, 5);
+        comment.message += `${MESSAGE[generatedNumberMessage()]} `;
       }
-      comment.name = NAME[createRandomId(0, 5)];
+      comment.name = NAME[getRandomInt(0, 5)];
+      comments.push(comment);
     }
     obj.comments = comments;
     resultArr.push(obj);
   }
   return resultArr;
 };
-
 createArrOfGeneratedObjects();
